@@ -89,8 +89,6 @@ BOARD_MKBOOTIMG_ARGS += --board $(BOARD_NAME)
 BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
 
 # Additional root folders
-TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
-
 BOARD_ROOT_EXTRA_FOLDERS += \
     metadata \
     efs
@@ -167,8 +165,9 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     vendor/aosp/config/device_framework_matrix.xml
 DEVICE_MATRIX_FILE := $(COMMON_PATH)/configs/compatibility_matrix.xml
 
-# QCOM
-BOARD_USES_QCOM_HARDWARE := true
+# QC common
+OVERRIDE_QCOM_HARDWARE_VARIANT := sm8150-common
+include device/qcom/common/BoardConfigQcom.mk
 
 # Samsung
 BOARD_VENDOR := samsung

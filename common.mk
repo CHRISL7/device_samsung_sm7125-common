@@ -123,7 +123,6 @@ PRODUCT_PACKAGES += \
     camera.device@3.4-impl \
     camera.device@3.5-impl \
     libgrallocusage.vendor \
-    vendor.qti.hardware.camera.device@1.0.vendor \
     android.hardware.camera.device@3.6.vendor \
     android.hardware.camera.provider@2.6.vendor
 
@@ -174,8 +173,7 @@ PRODUCT_PACKAGES += \
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey \
-    libdrmclearkeyplugin \
-    android.hardware.drm@1.3.vendor
+    libdrmclearkeyplugin
 
 # Fingerprint
 PRODUCT_PACKAGES += \
@@ -212,15 +210,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1.vendor
 
-# HIDL
-PRODUCT_PACKAGES += \
-    android.hidl.manager@1.0 \
-    android.hidl.manager@1.0.vendor \
-    libhidltransport \
-    libhidltransport.vendor \
-    libhwbinder \
-    libhwbinder.vendor
-
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/keylayout/sec_touchscreen.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/sec_touchscreen.kl
@@ -255,10 +244,6 @@ PRODUCT_PACKAGES += \
     libavservices_minijail \
     libavservices_minijail.vendor
 
-# Neural networks
-PRODUCT_PACKAGES += \
-    android.hardware.neuralnetworks@1.3.vendor
-
 # NFC
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.2-service.samsung \
@@ -284,6 +269,12 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw
+
+# QC common
+TARGET_BOARD_PLATFORM := atoll
+TARGET_USE_SM8150_HALS := true
+
+$(call inherit-product, device/qcom/common/common.mk)
 
 # Perf
 PRODUCT_PACKAGES += \
@@ -391,10 +382,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.lineage.touch@1.0-service.sm7125
 
-# Vendor service manager
-PRODUCT_PACKAGES += \
-    vndservicemanager
-
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.3-service-qti
@@ -470,13 +457,11 @@ PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 WITH_DEXPREOPT_DEBUG_INFO := false
 
 PRODUCT_DEXPREOPT_SPEED_APPS += \
-    Settings \
-    SystemUIGoogle
-    
+    Settings
+
 # Prop files
 TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
 TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
-TARGET_ODM_PROP += $(COMMON_PATH)/odm.prop
 
 # Live Wallpaper
 TARGET_INCLUDE_LIVE_WALLPAPERS := true
